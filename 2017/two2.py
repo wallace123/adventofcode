@@ -13,12 +13,13 @@ In this example, the sum of the results would be 4 + 3 + 2 = 9.
 
 What is the sum of each row's result in your puzzle input?
 """
+import math
 
 test = """
 5 9 2 8
 9 4 7 3
 3 8 6 5"""
-answer = 9
+answer = 9.0
 
 puzinput = """
 5048	177	5280	5058	4504	3805	5735	220	4362	1809	1521	230	772	1088	178	1794
@@ -48,13 +49,32 @@ def fixinput(input):
         inputdict[row+i] = [int(x) for x in inputlist[i].split()]
 
     return inputdict
-        
+
+def divisorGenerator(n):
+    large_divisors = []
+    for i in range(1, int(math.sqrt(n) + 1)):
+        if n % i == 0:
+            yield i
+            if i*i != n:
+                large_divisors.append(n / i)
+    for divisor in reversed(large_divisors):
+        yield divisor
 
 def myfunc(input):
     sum = 0
 
     for k, v in input.items():
-        sum += (max(v) - min(v))
+        for num in v:
+            divisors = list(divisorGenerator(num))
+            divisors.remove(num)
+            divisors.remove(1)
+            for div in divisors:
+                if div in v:
+                    if num > div:
+                        sum += (num/div)
+                    else:
+                        sum += (div/num)
+                    break            
 
     return sum
 
