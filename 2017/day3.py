@@ -18,3 +18,39 @@ How many steps are required to carry the data from the square identified in your
 
 Your puzzle input is 312051.
 """
+import math
+
+board_max = 10
+test1 = 1
+test2 = 12
+test3 = 23
+test4 = 1024
+mypuz = 312051
+
+answer1 = 0
+answer2 = 3
+answer3 = 2
+answer4 = 31
+
+def odd_sqr():
+    sqr_dict = {}
+    cell = 0
+    for i in range(1, board_max, 2):
+        sqr = i*i
+        sqr_dict[sqr] = [(cell, -cell), range((sqr+1) - (8*cell) , sqr+1)]
+        cell += 1
+
+    return sqr_dict
+
+def myfunc(input):
+    steps = 0
+    board = odd_sqr()
+    for k,v in board.items():
+        print(list(v[1]))
+    return steps
+
+#print(myfunc(test1) == answer1)
+#print(myfunc(test2) == answer2)
+#print(myfunc(test3) == answer3)
+#print(myfunc(test4) == answer4)
+print(myfunc(mypuz))
