@@ -20,6 +20,8 @@ What is the first value written that is larger than your puzzle input?
 Your puzzle input is still 312051.
 """
 
+from openpyxl import Workbook
+
 test1 = 23
 answer1 = 25
 test2 = 54
@@ -27,7 +29,8 @@ answer2 = 57
 puz_input = 312051
 
 def myfunc(input):
-    pass
+    wb = Workbook()
+    ws = wb.active()
 
 
 print(myfunc(test1) == answer1)
