@@ -20,7 +20,7 @@ Your puzzle input is 312051.
 """
 import math
 
-board_max = 10
+board_max = 700
 test1 = 1
 test2 = 12
 test3 = 23
@@ -42,15 +42,61 @@ def odd_sqr():
 
     return sqr_dict
 
+board = odd_sqr()
+
+def find_cell(num, key, value):
+    sqr_cell = value[0]
+    mov = int(math.sqrt(key)) - 1
+    bot = range((key-mov)+1, key+1)
+    #print(list(bot))
+    left = range((key-(2*mov))+1, (key-mov)+1)
+    #print(list(left))
+    top = range((key-(3*mov))+1, (key-(2*mov))+1)
+    #print(list(top))
+    right = range((key-(4*mov))+1, (key-(3*mov))+1)
+    #print(list(right))
+    x = 0
+    y = 0
+
+    if num in bot:
+        print("%d in bot" % num)
+        pos = bot[int(len(bot)/2):]
+        neg = bot[:int(len(bot)/2)]
+        if num in pos:
+            print("%d in pos" % num)
+        elif num in neg:
+            print("%d in neg" % num)
+            print(list(neg))
+            y = value[0][1]
+            rev_neg = list(reversed(list(neg)))
+            print(rev_neg)
+            x = -(rev_neg.index(num))
+    elif num in left:
+        print("%d in left" % num)
+        print(len(left))
+    elif num in top:
+        print("%d in top" % num)
+        print(len(top))
+    elif num in right:
+        print("%d in right" % num)
+        print(len(right))
+
+    return x, y
+
 def myfunc(input):
     steps = 0
-    board = odd_sqr()
+    x = 0
+    y = 0
     for k,v in board.items():
-        print(list(v[1]))
+        if input in list(v[1]):
+            (x,y)  = find_cell(input, k, v)
+            print((x,y))
+    steps = abs(x) + abs(y)
+    print(steps)
     return steps
 
 #print(myfunc(test1) == answer1)
 #print(myfunc(test2) == answer2)
-#print(myfunc(test3) == answer3)
+print(myfunc(test3) == answer3)
 #print(myfunc(test4) == answer4)
 print(myfunc(mypuz))
