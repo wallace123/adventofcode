@@ -96,12 +96,6 @@ def steps(wire, inter):
 
     return p
 
-def md(p):
-    return abs(p[0]) + abs(p[1])
-
-def getintersection(p1, p2):
-    return set(p1) & set(p2)
-
 
 def star1(data):
     mydata = parse1(data)
