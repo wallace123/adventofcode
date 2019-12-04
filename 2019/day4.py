@@ -61,6 +61,51 @@ def ispass(p):
 
     return True
 
+
+def ispass2(p):
+    # check length 6
+    if len(p) != 6:
+        #print('Failed length test: ', p)
+        return False
+    
+    # contains double
+    doub = False
+    digcount = Counter(p)
+    for i in digcount.values():
+        if i == 2:
+            doub = True
+            break
+
+    if not doub:
+        #print('Failed double check: ', p)
+        return False
+
+    # check adjacent
+    adj = False
+    for i in range(0, len(p)+1):
+        try:
+            if p[i] == p[i+1]:
+                adj = True
+                break
+        except IndexError:
+            pass
+
+    if not adj:
+        #print('Failed adjacent check: ', p)
+        return False
+
+    # check never decrease
+    for i in range(0, len(p)+1):
+        try:
+            if p[i] > p[i+1]:
+                #print('Failed decrease check: ', p)
+                return False
+        except IndexError:
+            pass
+
+    return True
+
+
 def star1(data):
     mydata = parse1(data)
     count = 0
@@ -71,7 +116,13 @@ def star1(data):
     print(count)
 
 def star2(data):
-    pass
+    mydata = parse1(data)
+    count = 0
+    for item in mydata:
+        if ispass2(item):
+            count += 1
+
+    print(count)
 
 star1(INPUT1)
 star2(INPUT1)
