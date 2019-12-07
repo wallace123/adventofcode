@@ -87,7 +87,10 @@ def inp(eip, myin, data, modes):
 #opcode = 4
 def getout(eip, data, modes):
     p1 = data[eip+1]
-    out = data[p1]
+    try:
+        out = data[p1]
+    except IndexError:
+        print(eip, modes, p1)
 
     return eip+2, out
 
@@ -150,10 +153,11 @@ def lt(eip, data, modes):
 
     if modes[0] == 0:
         p1 = data[p1]
-    elif modes[1] == 1:
+    elif modes[0] == 1:
         p1 = p1
     else:
         print("Error in mode 0 lt")
+        print(eip, modes, p1, p2, p3)
 
     if modes[1] == 0:
         p2 = data[p2]
@@ -178,7 +182,7 @@ def eq(eip, data, modes):
 
     if modes[0] == 0:
         p1 = data[p1]
-    elif modes[1] == 1:
+    elif modes[0] == 1:
         p1 = p1
     else:
         print("Error in mode 0 eq")
@@ -234,4 +238,4 @@ def star2(data):
 
 
 star1(data)
-star2(TEST1)
+star2(data)
