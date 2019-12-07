@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 INPUT1 = 'data/day5'
+TEST1 = '3,21,1008,21,8,20,1005,20,22,107,8,21,20,1006,20,31,1106,0,36,98,0,0,1002,21,125,20,4,20,1105,1,46,104,999,1105,1,46,1101,1000,1,20,4,20,1105,1,46,98,99'
 
 with open(INPUT1) as f:
     data = f.read()
@@ -39,14 +40,14 @@ def add(eip, data, modes):
     elif modes[0] == 1:
         p1 = p1
     else:
-        print("Error")
+        print("Error in mode 0 add")
 
     if modes[1] == 0:
         p2 = data[p2]
     elif modes[1] == 1:
         p2 = p2
     else:
-        print("Error")
+        print("Error in mode 1 add")
 
     data[p3] = p1+p2
 
@@ -63,14 +64,14 @@ def mul(eip, data, modes):
     elif modes[0] == 1:
         p1 = p1
     else:
-        print("Error")
+        print("Error in mode 0 mul")
 
     if modes[1] == 0:
         p2 = data[p2]
     elif modes[1] == 1:
         p2 = p2
     else:
-        print("Error")
+        print("Error in mode 1 mul")
 
     data[p3] = p1*p2
 
@@ -101,14 +102,14 @@ def jit(eip, data, modes):
     elif modes[0] == 1:
         p1 = p1
     else:
-        print("Error")
+        print("Error in mode 0 jit")
 
     if modes[1] == 0:
         p2 == data[p2]
     elif modes[1] == 1:
         p2 = p2
     else:
-        print("Error")
+        print("Error in mode 1 jit")
 
     if p1 == 0:
         return eip+3
@@ -126,14 +127,14 @@ def jif(eip, data, modes):
     elif modes[0] == 1:
         p1 = p1
     else:
-        print("Error")
+        print("Error in mode 0 jif")
 
     if modes[1] == 0:
         p2 == data[p2]
     elif modes[1] == 1:
         p2 = p2
     else:
-        print("Error")
+        print("Error in mode 1 jif")
 
     if p1 == 0:
         return p2
@@ -152,14 +153,14 @@ def lt(eip, data, modes):
     elif modes[1] == 1:
         p1 = p1
     else:
-        print("Error")
+        print("Error in mode 0 lt")
 
     if modes[1] == 0:
         p2 = data[p2]
-    elif modes[1] == 1
+    elif modes[1] == 1:
         p2 = p2
     else:
-        print("Error")
+        print("Error in mode 1 lt")
 
     if p1 < p2:
         data[p3] = 1
@@ -180,14 +181,14 @@ def eq(eip, data, modes):
     elif modes[1] == 1:
         p1 = p1
     else:
-        print("Error")
+        print("Error in mode 0 eq")
 
     if modes[1] == 0:
         p2 = data[p2]
-    elif modes[1] == 1
+    elif modes[1] == 1:
         p2 = p2
     else:
-        print("Error")
+        print("Error in mode 1 eq")
 
     if p1 == p2:
         data[p3] = 1
@@ -211,7 +212,13 @@ def comp(data, myin):
             eip, out = getout(eip, data, modes)
             print(out)
         elif op == 5:
-            eip = 
+            eip = jit(eip, data, modes)
+        elif op == 6:
+            eip = jif(eip, data, modes)
+        elif op == 7:
+            eip, data = lt(eip, data, modes)
+        elif op == 8:
+            eip, data = eq(eip, data, modes) 
 
     return data
 
@@ -222,8 +229,9 @@ def star1(data):
 
 
 def star2(data):
-    pass
+    mydata = parse1(data)
+    mydata = comp(mydata, 5)
 
 
 star1(data)
-star2(data)
+star2(TEST1)
