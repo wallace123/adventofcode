@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+import time
 
 INPUT1 = 'data/day5'
 TEST1 = '3,21,1008,21,8,20,1005,20,22,107,8,21,20,1006,20,31,1106,0,36,98,0,0,1002,21,125,20,4,20,1105,1,46,104,999,1105,1,46,1101,1000,1,20,4,20,1105,1,46,98,99'
@@ -108,16 +109,16 @@ def jit(eip, data, modes):
         print("Error in mode 0 jit")
 
     if modes[1] == 0:
-        p2 == data[p2]
+        p2 = data[p2]
     elif modes[1] == 1:
         p2 = p2
     else:
         print("Error in mode 1 jit")
 
-    if p1 == 0:
-        return eip+3
-    else:
+    if p1 != 0:
         return p2
+    else:
+        return eip+3
 
 
 #opcode = 6
@@ -133,7 +134,7 @@ def jif(eip, data, modes):
         print("Error in mode 0 jif")
 
     if modes[1] == 0:
-        p2 == data[p2]
+        p2 = data[p2]
     elif modes[1] == 1:
         p2 = p2
     else:
@@ -157,7 +158,6 @@ def lt(eip, data, modes):
         p1 = p1
     else:
         print("Error in mode 0 lt")
-        print(eip, modes, p1, p2, p3)
 
     if modes[1] == 0:
         p2 = data[p2]
@@ -237,5 +237,5 @@ def star2(data):
     mydata = comp(mydata, 5)
 
 
-#star1(data)
+star1(data)
 star2(data)
