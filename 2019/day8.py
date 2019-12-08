@@ -3,6 +3,7 @@
 from collections import Counter
 
 INPUT1 = 'data/day8'
+TEST1 = '0222112222120000'
 
 with open(INPUT1) as f:
     data = f.read()
@@ -39,7 +40,51 @@ def star1(data):
 
 
 def star2(data):
-    pass
+    v = parse1(data)
+    datasize = len(v)
+    pix = 25*6
+    #pix = 2*2
+    layer = []
+    layers = []
+    tmp = []
+    image = []
+
+    for i in range(0, datasize+1):
+        if (i==0) or (i%pix != 0):
+            layer.append(v[i])
+        else:
+            layers.append(layer)
+            if i < datasize:
+                layer = [v[i]]
+
+    for i in range(0, len(layers[0])):
+        for l in layers:
+            tmp.append(l[i])
+        image.append(tmp)
+        tmp = []
+
+    decode = []
+    for i in image:
+        for p in i:
+            if p == 0 or p == 1:
+                decode.append(p)
+                break
+
+    #print(decode)
+    out = ""
+    for i in range(0, len(decode)):
+        if (i==0) or (i%25 != 0):
+            if decode[i] == 1:
+                out += ' '
+            else:
+                out += '*'
+        else:
+            print(out)
+            if i < len(decode):
+                if decode[i] == 1:
+                    out = ' '
+                else:
+                    out = '*'
 
 
 star1(data)
