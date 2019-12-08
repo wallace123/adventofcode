@@ -237,5 +237,5 @@ def star2(data):
     mydata = comp(mydata, 5)
 
 
-star1(data)
+#star1(data)
 star2(data)
