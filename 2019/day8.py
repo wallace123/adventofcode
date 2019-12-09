@@ -57,9 +57,10 @@ def star2(data):
             if i < datasize:
                 layer = [v[i]]
 
-    for i in range(0, len(layers[0])):
+    for i in range(0, len(layers[0])+1):
         for l in layers:
-            tmp.append(l[i])
+            if i < len(layers[0]):
+                tmp.append(l[i])
         image.append(tmp)
         tmp = []
 
@@ -75,16 +76,16 @@ def star2(data):
     for i in range(0, len(decode)):
         if (i==0) or (i%25 != 0):
             if decode[i] == 1:
-                out += ' '
+                out += '#'
             else:
-                out += '*'
+                out += ' '
         else:
             print(out)
             if i < len(decode):
                 if decode[i] == 1:
-                    out = ' '
+                    out = '#'
                 else:
-                    out = '*'
+                    out = ' '
 
 
 star1(data)
