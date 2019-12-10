@@ -58,7 +58,12 @@ def add(eip, data, modes, base):
     else:
         print("Error in mode 1 add")
 
-    data[p3] = p1+p2
+    if modes[2] == 0:
+        data[p3] = p1+p2
+    elif modes[2] == 2:
+        data[base+p3] = p1+p2
+    else:
+        print('Error in modes 2 add')
 
     return eip+4, data
 
@@ -87,7 +92,12 @@ def mul(eip, data, modes, base):
     else:
         print("Error in mode 1 mul")
 
-    data[p3] = p1*p2
+    if modes[2] == 0:
+        data[p3] = p1*p2
+    elif modes[2] == 2:
+        data[base+p3] = p1*p2
+    else:
+        print("Error in modes 2 mul")
 
     return eip+4, data
 
@@ -207,9 +217,19 @@ def lt(eip, data, modes, base):
         print("Error in mode 1 lt")
 
     if p1 < p2:
-        data[p3] = 1
+        if modes[2] == 0:
+            data[p3] = 1
+        elif modes[2] == 2:
+            data[base+p3] = 1
+        else:
+            print("Error in mode 2 lt")
     else:
-        data[p3] = 0
+        if modes[2] == 0:
+            data[p3] = 0
+        elif modes[2] == 2:
+            data[base+p3] = 0
+        else:
+            print("Error in mode 2 lt")
 
     return eip+4, data    
 
@@ -239,9 +259,19 @@ def eq(eip, data, modes, base):
         print("Error in mode 1 eq")
 
     if p1 == p2:
-        data[p3] = 1
+        if modes[2] == 0:
+            data[p3] = 1
+        elif modes[2] == 2:
+            data[base+p3] = 1
+        else:
+            print("Error in mode 2 eq")
     else:
-        data[p3] = 0
+        if modes[2] == 0:
+            data[p3] = 0
+        elif modes[2] == 2:
+            data[base+p3] = 0
+        else:
+            print("Error in mode 2 eq")
 
     return eip+4, data
 
@@ -297,12 +327,13 @@ def comp(data, s):
 def star1(data):
     mydata = parse1(data)
     #print(comp(mydata, 1))
-    comp(mydata, 0)
+    comp(mydata, 1)
 
 
 def star2(data):
-    pass
+    mydata = parse1(data)
+    comp(mydata, 2)
 
 
-star1(data)
+#star1(data)
 star2(data)
