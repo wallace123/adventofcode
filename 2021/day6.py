@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+import matplotlib.pyplot as plt
 
 class Laternfish:
     def __init__(self):
@@ -21,5 +22,8 @@ class Laternfish:
             
 if __name__ == '__main__':
     LF = Laternfish()
-    LF.mult_fish(256)
-    print(len(LF.fish))
+    for i in range(256):
+        LF.mult_fish(i)
+        print(f'Day {i+1} - {len(LF.fish)}')
+        LF.fish = Laternfish._parse_input(LF)
+        
