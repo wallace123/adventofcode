@@ -1,10 +1,13 @@
 #!/usr/bin/python3
+from collections import Counter
 
 class Trench:
     def __init__(self):
         self.target_area = []
         self.x_range = (0, 0)
         self.y_range = (0, 0)
+        self.hits = []
+        self.heights = []
         
     def _parse_input(self):
         with open('data/day17.txt', 'r') as infile:
@@ -60,14 +63,31 @@ class Trench:
         while 1:
             position, velocity = self.step(position, velocity)
             if self.hit(position):
-                print('hit!')
-                return
+                return True
             elif self.over(position):
-                print('over!')
-                return       
+                #print('over!')
+                return False
+
+    def get_height(self, velocity):
+        position = (0, 0)
+        prev_y = 0
+        y = 1
+        while y > prev_y:
+            prev_y = position[1]
+            position, velocity = self.step(position, velocity)
+            y = position[1]
+            self.heights.append(y)                    
 
 
 if __name__ == '__main__':
     T = Trench()
     T._parse_input()
-    T.shoot((17, -4))
+    for x in range(100):
+        for y in range(150, 200):
+            if T.shoot((x, y)):
+                T.hits.append((x, y))
+            
+    print(T.hits)
+    for hit in T.hits:
+        T.get_height(hit)
+    print(max(Counter(T.heights)))
