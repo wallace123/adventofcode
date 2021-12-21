@@ -82,8 +82,8 @@ class Trench:
 if __name__ == '__main__':
     T = Trench()
     T._parse_input()
-    for x in range(75):
-        for y in range(-250, 350):
+    for x in range(100):
+        for y in range(-400, 400):
             if T.shoot((x, y)):
                 T.hits.append((x, y))
     
