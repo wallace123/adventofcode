@@ -82,12 +82,16 @@ class Trench:
 if __name__ == '__main__':
     T = Trench()
     T._parse_input()
-    for x in range(100):
-        for y in range(150, 200):
+    for x in range(75):
+        for y in range(-250, 350):
             if T.shoot((x, y)):
                 T.hits.append((x, y))
-            
-    print(T.hits)
-    for hit in T.hits:
-        T.get_height(hit)
-    print(max(Counter(T.heights)))
+    
+    #day 1    
+    #print(T.hits)
+    #for hit in T.hits:
+    #    T.get_height(hit)
+    #print(max(Counter(T.heights)))
+    
+    # day 2
+    print(len(T.hits))
